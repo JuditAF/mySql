@@ -16,18 +16,12 @@ async function main() {
 
         console.log("Conexión correcta");
 
-        let sql = "CREATE TABLE direccion2 (id_direccion INT AUTO_INCREMENT PRIMARY KEY, " +
-            "calle VARCHAR(45), " +
-            "numero INT(3) ," +
-            "portal INT(2) ," +
-            "escalera VARCHAR(10) ," +
-            "piso INT(3) ," +
-            "puerta INT(2) ," +
-            "barrio VARCHAR(85) ," +
-            "localidad VARCHAR(84) ," +
-            "municipio VARCHAR(93) ," +
-            "país VARCHAR(56) ," +
-            "código postal INT(5))";
+        let sql = "CREATE TABLE marks (id_direccion INT AUTO_INCREMENT PRIMARY KEY, " +
+            "id_mark INT, " +
+            "id_student INT," +
+            "id_subject INT," +
+            "date DATE ," +
+            "mark INT(2))";
 
         let [result] = await connection.query(sql);                 // Desestructuración
 
