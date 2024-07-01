@@ -80,12 +80,12 @@ async function main() {
         // console.log(result);                                             // Crear tabla estudiantes OJO OPCIÓN FOREIGN KEY------------------------------------------
 
         // let sql = "INSERT INTO students (first_name, last_name, id_grupo)" +             
-        //           "VALUES(\"Rodrigo\",\"Castillo\", 9), (\"Ana\",\"Olmo\", 2), (\"Martin\",\"Márquez\", 7), (\"Guillermo\",\"Hadey\", 5), (\"Rodrigo\",\"Merino\", 6), (\"María\",\"Uribe\", 10), (\"Lucía\",\"Gracia\", 11), (\"Libertad\",\"Cruz\", 3), (\"Alhana\",\"Anderson\", 4), (\"Pepe\",\"Montilla\", 8)";
+        //           "VALUES(\"Rodrigo\",\"Castillo\", 9), (\"Ana\",\"Olmo\", 2), (\"Martin\",\"Márquez\", 7), (\"Guillermo\",\"Hadey\", 1), (\"Rodrigo\",\"Merino\", 6), (\"María\",\"Uribe\", 10), (\"Lucía\",\"Gracia\", 11), (\"Libertad\",\"Cruz\", 3), (\"Alhana\",\"Anderson\", 4), (\"Pepe\",\"Montilla\", 8)";
         // let [result] = await connection.query(sql);  
         // console.log(result);                                     // Insertar datos tabla estudiantes
 
         // let sql = "INSERT INTO marks (id_student, id_subject, date, mark)" +             
-        //           "VALUES (1, 4, '2000-10-01', 9), (9, 9, '2020-01-30', 2), (2, 1, '1998-07-25', 2), (5, 3, '2023-02-17', 7), (8, 7, '2018-08-23', 6), (2, 8, '2024-04-06', 5), (1, 4, '2015-05-11', 11), (1, 4, '2010-11-23', 3), (3, 2, '2024-06-16', 4), (4, 5, '2002-08-17', 8)";
+        //           "VALUES (1, 1, '2000-10-01', 9), (9, 9, '2020-01-30', 2), (2, 1, '1998-07-25', 2), (5, 3, '2023-02-17', 7), (8, 7, '2018-08-23', 6), (2, 8, '2024-04-06', 5), (1, 4, '2015-05-11', 11), (1, 4, '2010-11-23', 3), (3, 2, '2024-06-16', 4), (4, 5, '2002-08-17', 8)";
         // let [result] = await connection.query(sql);  
         // console.log(result);                                     // Insertar datos tabla marks
 
