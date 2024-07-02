@@ -25,10 +25,26 @@ async function main() {
         // let sql = "SHOW COLUMNS FROM grupo";
         // let [result] = await connection.query(sql);
         // console.log(result);                                             // Listar todos los campos de la tabla “groups”
+
+        // let sql = "SHOW FIELDS FROM grupo";
+        // let [result] = await connection.query(sql);
+        // console.log(result);                                             // Listar todos los campos de la tabla “groups”
+
+        // let sql = "SELECT * FROM grupo";
+        // let [result] = await connection.query(sql);
+        // console.log(result);                                             // Listar todos los campos de la tabla “groups”
         
-        // let sql = "eliminar AS Updated_notes FROM marks WHERE mark>5 AND date < DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
+        // let sql = "DELETE FROM marks WHERE mark>5 AND date < DATE_SUB(CURDATE(), INTERVAL 1 YEAR)";
         // let [result] = await connection.query(sql);
         // console.log(result);                                   // Elimina todas las notas de la base de datos que estén por encima de 5 y que sean del año pasado
+
+        // let sql = "DELETE FROM marks WHERE mark>5 AND date < DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+        // let [result] = await connection.query(sql);
+        // console.log(result);                                   // Elimina todas las notas de la base de datos que estén por encima de 5 y que sean del año pasado
+
+        // let sql = "DELETE FROM marks ORDER BY mark>5 AND date < DATE_SUB(NOW(), INTERVAL 1 YEAR)";
+        // let [result] = await connection.query(sql);
+        // console.log(result);                                    // Elimina todas las notas de la base de datos que estén por encima de 5 y que sean del año pasado
 
         // let sql = "ALTER TABLE students ADD fecha_ingreso DATE";           // Insertar COLUMNA en tabla students
         // let [result] = await connection.query(sql);  
@@ -39,9 +55,31 @@ async function main() {
         // let [result] = await connection.query(sql);  
         // console.log(result);                                     // Insertar datos en nueva Columna fecha_ingreso
         
-        let sql = "SELECT * AS students_thisYear FROM students WHERE fecha_ingreso BETWEEN “2024-01-30” AND “2024-12-31”";
-        let [result] = await connection.query(sql);
-        console.log(result);                                     // Obtén los datos de todos los estudiantes que estén en el bootcamp este año
+        // let sql = "SELECT id_student AS students_thisYear FROM students WHERE fecha_ingreso BETWEEN '2024-01-30' AND '2024-12-31'";
+        // let [result] = await connection.query(sql);
+        // console.log(result);                                     // Obtén los datos de todos los estudiantes que estén en el bootcamp este año
+
+        //------------------------------------------------------ NO FUNCIONA --------------------------------------------------------------------------------------//
+
+                                                 // Obtén los datos de todos los estudiantes que estén en el bootcamp este año //
+
+        // let sql = "SELECT (id_student) FROM students WHERE fecha_ingreso = year(curdate());";  
+        // let [result] = await connection.query(sql);
+        // console.log(result);
+
+        // let sql = "SELECT (id_student) FROM students WHERE fecha_ingreso LIKE '2024';";
+        // let [result] = await connection.query(sql);
+        // console.log(result);
+
+        // let sql = "SELECT (id_student) FROM students WHERE fecha_ingreso = YEAR(NOW());";
+        // let [result] = await connection.query(sql);
+        // console.log(result);
+
+         //---------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+        // let sql = "SELECT id_subject, COUNT(DISTINCT id_teacher) AS teachers_forSubject FROM subject_teacher GROUP BY id_subject";
+        // let [result] = await connection.query(sql);
+        // console.log(result)                                         // Calcular el numero de profesores que hay por cada asignatura
 
     }
     catch (error) {
