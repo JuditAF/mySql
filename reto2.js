@@ -93,9 +93,9 @@ async function main() {
         // let [result] = await connection.query(sql);
         // console.log(result);                                     // Obtén la media aritmética de las notas que se han dado en el último año por alumno
 
-        let sql = "SELECT id_student , AVG(mark) FROM marks WHERE YEAR(date) = YEAR(NOW()) GROUP BY id_student";
-        let [result] =await connection.query(sql)
-        console.log(result);                                     // Obtén la media aritmética de las notas que se han dado en el último año por alumno
+        // let sql = "SELECT id_student , AVG(mark) FROM marks WHERE YEAR(date) = YEAR(NOW()) GROUP BY id_student";
+        // let [result] =await connection.query(sql)
+        // console.log(result);                                     // Obtén la media aritmética de las notas que se han dado en el último año por alumno
 
     }
     catch (error) {
