@@ -32,7 +32,6 @@ async function main() {
         // let [result] = await connection.query(sql)
         // console.log(result);                                //  Obtén el número total de alumnos por asignatura, el nombre de la asignatura y el nombre y apellidos del profesor que la imparte
 
-        // marks.id_student, marks.id_subject, numStudents_XSubject
     }
 
     catch (error) {
