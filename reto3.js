@@ -19,6 +19,22 @@ async function main() {
         let [result] = await connection.query(sql)
         console.log(result);                                // Obtén los nombres y apellidos de los alumnos y los nombres de las asignaturas en las que están apuntados
 
+<<<<<<< HEAD
+=======
+        // let sql = "SELECT first_name, last_name, title FROM teachers JOIN subject_teacher ON (teachers.id_teacher = subject_teacher.id_teacher)" +
+        //     "JOIN subjects ON (subjects.id_subjects = subject_teacher.id_subject) ORDER BY teachers.first_name";
+        // let [result] = await connection.query(sql)
+        // console.log(result);                                //  Obtén todos los nombres y apellidos de los profesores y los nombres de las asignaturas que imparten
+
+        // let sql = "SELECT COUNT(m.id_student) AS numStudents, s.title, teachers.first_name, teachers.last_name FROM marks AS m " + 
+        //           "INNER JOIN subjects AS s ON (m.id_subject = s.id_subjects)" +
+        //           "INNER JOIN subject_teacher ON (s.id_subjects = subject_teacher.id_sub)" + 
+        //           "INNER JOIN teachers ON (subject_teacher.id_teacher = teachers.id_teacher)" +  
+        //           "GROUP BY s.id_subjects";
+        // let [result] = await connection.query(sql)
+        // console.log(result);                                //  Obtén el número total de alumnos por asignatura, el nombre de la asignatura y el nombre y apellidos del profesor que la imparte
+
+>>>>>>> dia3
     }
 
     catch (error) {
