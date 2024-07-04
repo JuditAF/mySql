@@ -14,7 +14,34 @@ async function main() {
 
         console.log("Conexión correcta");
 
-        // let sql = "SELECT COUNT(m.id_student) AS numStudents, s.title, teachers.first_name, teachers.last_name FROM marks AS m " + 
+        //  Obtener un listado de todos los objetos que el museo tiene en préstamo, su localización dentro de la exposición, la fecha de expiración de este, 
+        //  la información básica (nombre, apellidos y email) de la persona que los ha prestado.
+
+        let sql = "";           
+        let [result] = await connection.query(sql);
+        console.log(result);
+
+         //  Obtener de forma ordenada de mayor a menor, el número total de objetos o piezas agrupados por su situación dentro de la organización, esto es, 
+         //  cuántos hay expuestos, cuántos en itinerancia y cuántos almacenados.
+
+        // let sql = "";           
+        // let [result] = await connection.query(sql);
+        // console.log(result);
+
+    }
+
+    catch (error) {
+
+        console.log(error);
+        await connection.end();
+    }
+};
+
+main();
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+ // let sql = "SELECT COUNT(m.id_student) AS numStudents, s.title, teachers.first_name, teachers.last_name FROM marks AS m " + 
         //           "INNER JOIN subjects AS s ON (m.id_subject = s.id_subjects)" +
         //           "INNER JOIN subject_teacher ON (s.id_subjects = subject_teacher.id_sub)" + 
         //           "INNER JOIN teachers ON (subject_teacher.id_teacher = teachers.id_teacher)" +  
@@ -31,13 +58,4 @@ async function main() {
         // let [result] = await connection.query(sql);
         // console.log(result);
 
-    }
-
-    catch (error) {
-
-        console.log(error);
-        await connection.end();
-    }
-};
-
-main();
+        //----------------------------------------------------------------------------------------------------------------------------------------------------------//
