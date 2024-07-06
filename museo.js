@@ -17,21 +17,24 @@ async function main() {
         //  Obtener un listado de todos los objetos que el museo tiene en préstamo, su localización dentro de la exposición, la fecha de expiración de este, 
         //  la información básica (nombre, apellidos y email) de la persona que los ha prestado.
 
-        let sql = "SELECT p.nombre, pr.fecha_devolucion, l.sala_expositor, l.sala_vitrina, l.almacen_armario, l.almacen_estanteria, d.nombre, d.apellidos, d.email FROM piezas AS p " + 
-                  "INNER JOIN localizacion AS l ON (p.id_localizacion = l.id_localizacion) " +
-                  "INNER JOIN prestamo AS pr ON (pr.id_prestamo = p.id_prestamo) " +
-                  "INNER JOIN dueño AS d ON (d.id_dueño = p.id_dueño) " +
-                  "WHERE NOT (p.id_prestamo =0) ORDER BY p.nombre"; 
+        // let sql = "SELECT p.nombre, pr.fecha_devolucion, l.sala_expositor, l.sala_vitrina, l.almacen_armario, l.almacen_estanteria, d.nombre, d.apellidos, d.email FROM piezas AS p " + 
+        //           "INNER JOIN localizacion AS l ON (p.id_localizacion = l.id_localizacion) " +
+        //           "INNER JOIN prestamo AS pr ON (pr.id_prestamo = p.id_prestamo) " +
+        //           "INNER JOIN dueño AS d ON (d.id_dueño = p.id_dueño) " +
+        //           "WHERE NOT (p.id_prestamo =0) ORDER BY p.nombre"; 
           
-        let [result] = await connection.query(sql);
-        console.log(result);
+        // let [result] = await connection.query(sql);
+        // console.log(result);
 
          //  Obtener de forma ordenada de mayor a menor, el número total de objetos o piezas agrupados por su situación dentro de la organización, esto es, 
          //  cuántos hay expuestos, cuántos en itinerancia y cuántos almacenados.
 
-        // let sql = "";           
-        // let [result] = await connection.query(sql);
-        // console.log(result);
+        let sql = "SELECT COUNT(c.id_coleccion) AS num_Piezas, c.estado FROM coleccion AS c " +    
+                  "INNER JOIN piezas AS p ON (c.id_coleccion = p.id_coleccion) " +
+                  "GROUP BY c.estado " +
+                  "ORDER BY num_Piezas DESC"; 
+        let [result] = await connection.query(sql);
+        console.log(result);
 
     }
 
