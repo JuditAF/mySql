@@ -18,9 +18,9 @@ async function main() {
         // let [result] = await connection.query(sql);
         // console.log(result);                                                // calcular la nota media de los alumnos de la asignatura 1
 
-        // let sql = "SELECT COUNT(*) AS Num_students FROM students";
-        // let [result] = await connection.query(sql);
-        // console.log(result);                                             // Calcular el número total de alumnos que hay en el bootcamp
+        let sql = "SELECT COUNT(*) AS Num_students FROM students";
+        let [result] = await connection.query(sql);
+        console.log(result);                                             // Calcular el número total de alumnos que hay en el bootcamp
 
         // let sql = "SHOW COLUMNS FROM grupo";
         // let [result] = await connection.query(sql);
