@@ -1,5 +1,24 @@
 {
   "dependencies": {
-    "mysql2": "^3.10.1"
-  }
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.10.2"
+  },
+  "name": "table_schema_address",
+  "description": "Repositorio para los retos de Bases de Datos",
+  "version": "1.0.0",
+  "main": "apiRest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuditAF/mySql.git"
+  },
+  "author": "M Judit Amate Franco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuditAF/mySql/issues"
+  },
+  "homepage": "https://github.com/JuditAF/mySql#readme"
 }
