@@ -1,7 +1,7 @@
 
 import { Alumno } from "./alumno";
 
-export class Respuesta {
+class Respuesta {
 
     constructor (public error: boolean,
                  public codigo: number,
@@ -10,3 +10,5 @@ export class Respuesta {
     ) {};
 
 };
+
+module.exports = Respuesta;

@@ -5,7 +5,7 @@ const alumnoCtrl = require ('../controller/alumno.controller');
 
 
 router.get('/', alumnoCtrl.getStart);
-router.get('/alumnos', alumnoCtrl.getAlumno);
+router.get('/alumnos', alumnoCtrl.getAlumnos);
 router.get('/alumnos/:id_student', alumnoCtrl.getAlumnoParams);
 
 
@@ -15,3 +15,11 @@ router.delete('/alumnos', alumnoCtrl.deleteAlumno);
 
 
 module.exports = router;
+
+// { 
+//     "id_student": 36,
+//     "first_name": "Enrique",
+//     "lasta_name": "Nuñez",
+//     "fecha_ingreso": "2023-12-20",
+//     "id_grupos: 2"
+//  }

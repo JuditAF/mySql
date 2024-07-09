@@ -1,4 +1,4 @@
-export class Alumno {
+class Alumno {
 
     public alumno: Alumno
     public alumnos: Alumno[]
@@ -8,7 +8,9 @@ export class Alumno {
                 public last_name: string,
                 public fecha_ingreso: number,
                 public id_grupos: number = 0,
-                public photo: string = " ",) { }
+              ) { } //  public photo: string = " ",
 
 
-}
+};
+
+module.exports = Alumno;

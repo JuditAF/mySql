@@ -1,113 +1,156 @@
 
 const { pool } = require("../database");
-const alumno = require("../models/alumno");
-const Alumno = require('../models/alumno');
+// const alumno = require("../models/alumno");
+// const respuesta = require('../models/respuesta');
 
 let alumnos = [];
 
-function getStart(request, response) {
-    let respuesta = { error: true, codigo: 200, mensaje: 'Punto de inicio' };
-    response.send(respuesta);
+const getStart = async (request, response) => {
+    try {
+        if (request) {
+            let respuesta = { error: true, codigo: 200, mensaje: 'Punto de inicio' };
+            response.send(respuesta);}
+    }
+    catch (error) {
+        response.status(500).Json({ error: error.message });                                                    // Json es un método conversor de formato
+    }
 };
+
+const getAlumnos = async (request, response) => {
+    try {
+
+        let sql = 'SELECT * FROM students';
+        console.log(sql);
+
+        let [result] = await pool.query(sql);                                                                   // Destructuring  
+                                                                   
+        let respuesta = { error: false, codigo: 200, mensaje: "Alumnos almacenados", data: Json(result) }
+        response.send(respuesta);
+        // response.JSON(result);
+      } catch (error) {
+        response.status(500).Json({ error: error.message });
+      }
+    };
 
 const getAlumnoParams = async (request, response) => {
     try {
+
         let sql;
-        if (request.query.id_student == null) 
-            sql = "SELECT * FROM students"
-        
-        //     const id_student = request.params.id_student;
-        // const alumno = alumnos.find(alumno => alumno.id_student === id_student);
-        // if (alumno != null && id_student === alumno.id_student) {
-        //     let respuesta = { error: false, codigo: 200, mensaje: "Alumno encontrado", data: [alumno] }
-        //     response.send(respuesta);
-        else 
-            sql = "SELECT * FROM students WHERE id_student=" + request.query.id_student;
+
+        if (request.query.id_student == null) {
+            sql = "SELECT * FROM students";
+
+            // response.Json(sql);
+            response.send({ error: true, codigo: 404, mensaje: "El Alumno no existe", data: JSON(sql) });
+     
+        } else {
+            const id_student = request.params.id_student;
+            sql = "SELECT * FROM students WHERE id_student=" + id_student;
             let [result] = await pool.query(sql);
-            response.send(result);
-            // response.send({ error: true, codigo: 404, mensaje: "El Alumno no existe" })
-    
+
+            console.log(result);
+            // response.JSON(result);
+            let respuesta = { error: false, codigo: 200, mensaje: "Alumno encontrado", data: Json(result) };
+            response.send(respuesta);
+        }
     }
     catch (error) {
-        console.log(error);
+        response.status(500).Json({ error: error.message });
     }
 };
 
-const getAlumno = async (request, response) => {
+const postAlumno = async (request, response) => {
     try {
-        let sql;
-        if (request.query.id_student != null)
-            if (alumnos != null) {
-                let respuesta = { error: false, codigo: 200, mensaje: "Alumnos almacenados", data: alumnos }
-                response.json(respuesta);
-            } else {
-                response.send({ error: true, codigo: 200, mensaje: "La lista de Alumnos está vacía" })
+
+        console.log(request.body);
+
+        let sql = "INSERT INTO students (first_name, last_name, fecha_ingreso, id_grupos) " +
+                  "VALUES ('" + request.body.first_name + "', '" +
+                                request.body.last_name + "', '" +
+                                request.body.fecha_ingreso + "', '" +
+                                request.body.id_grupos + "')";
+        console.log(sql);
+        let [result] = await pool.query(sql);
+        console.log(result);
+        // response.Json(result);
+
+        if (result.insertId) {                                  // InertId es un método de sql
+
+            response.send(String(result.insertId));             // uso "String" para para el id_student de Number a String
+            respuesta = {
+                error: false, codigo: 201,                      // 201: Código Objeto Creado
+                mensaje: "Alumno añadido", data: Json(result)
+            }
+        } else {
+            response.send(-1);
+            respuesta = {
+                error: true, codigo: 200,
+                mensaje: "Alumno ya existente", data: result.insertId
             }
     }
-    catch (error) {
-        console.log(error);
-    }
+        response.send(respuesta);
+    } catch (error) {
+        response.status(500).Json({ error: error.message });
+    };
 };
 
+const putAlumno = async (request, response) => {
+    try {
 
-function postAlumno(request, response) {
+        console.log(request.body);
 
-    console.log(request.body);
+        let params = [request.body.first_name,
+                      request.body.last_name,
+                      request.body.fecha_ingreso,
+                      request.body.id_grupos,
+                      request.body.id_student];
+        
+        let sql = "UPDATE students SET first_name = COALESCE(?, first_name), " + 
+                  "last_name = COALESCE(?, last_name), " +
+                  "fecha_ingreso = COALESCE(?, fecha_ingreso), " +
+                  "id_grupos = COALESCE(?, id_grupos) WHERE id_student = ?";
+                  
+        console.log(sql); 
 
-    let { id_student, first_name, last_name, fecha_ingreso, id_grupos } = request.body;
-    let newAlumno = new Alumno(id_student, first_name, last_name, fecha_ingreso, id_grupos);
+        let [result] = await pool.query(sql, params);
+        console.log(result);
+        // response.send(result);
 
-    if (newAlumno !== null) {
-
-        alumnos.push(newAlumno);
-        respuesta = {
-            error: false, codigo: 201,                      // 201: Código Objeto Creado
-            mensaje: "Alumno añadido", data: newAlumno
+        if (result) {
+            respuesta = {
+                error: false, codigo: 200,
+                mensaje: "Alumno Actualizado", data: JSON(result)
+            }
+        } else {
+            respuesta = {
+                error: true, codigo: 404,
+                mensaje: "el Alumno no existe", data: getAlumnos()
+            }
         }
-    } else {
-        respuesta = {
-            error: true, codigo: 200,
-            mensaje: "Alumno ya existente", data: newAlumno
-        }
-    }
-    response.send(respuesta);
+
+        response.send(respuesta);
+
+    } catch (error) {
+        response.status(500).json({ error: error.message });
+    };
 };
 
-
-function putAlumno(request, response) {
-
-    let { id_student, first_name, last_name, fecha_ingreso, id_grupos } = request.body;
-    let i = alumnos.findIndex(alumno => alumno.id_student == id_student);
-
-    if (i !== -1) {
-        alumnos[i].id_student = id_student;
-        alumnos[i].first_name = first_name;
-        alumnos[i].last_name = last_name;
-        alumnos[i].fecha_ingreso = fecha_ingreso;
-        alumnos[i].id_grupos = id_grupos;
-
-        respuesta = {
-            error: false, codigo: 200,
-            mensaje: "Alumno Actualizado", data: books[i]
-        }
-    } else {
-        respuesta = {
-            error: true, codigo: 404,
-            mensaje: "el Alumno no existe", data: book
-        }
-    }
-
-    response.send(respuesta);
-};
-
-
-function deleteAlumno(request, response) {
+const deleteAlumno = async (request, response) => {
 
     let id_student = request.params.id_student;
-    let newAlumnos = alumnos.filter(alumno => alumno.id_student != id_student);
-    console.log(id_student);
-    console.log(newAlumnos);
-    let respuesta;
+
+    try {
+
+        console.log(request.body);
+
+        let sql = "DELETE FROM students WHERE id_student = ?" + String(id_student);
+        console.log(sql);
+
+        let [result] = await pool.query(sql, [request.body.id_student]);
+        // response.send(result);
+
+        alumnos = getAlumnos();
+        let newAlumnos = alumnos.filter(alumno => alumno.id_student != id_student);
 
     if (newAlumnos.length != alumnos.length) {
 
@@ -115,16 +158,19 @@ function deleteAlumno(request, response) {
 
         respuesta = {
             error: false, codigo: 200,
-            mensaje: "Libro eliminado", data: alumnos
+            mensaje: "Alumno eliminado", data: Json(alumnos)
         }
     } else {
         respuesta = {
             error: true, codigo: 404,
-            mensaje: "el Libro no existe", data: alumno
+            mensaje: "el Alumno no existe", data: Json(alumnos)
         }
     }
     response.send(respuesta);
+    } catch (error) {
+        response.status(500).json({ error: error.message });
+    };
 };
 
 
-module.exports = { getStart, getAlumno, getAlumnoParams, postAlumno, putAlumno, deleteAlumno };
+module.exports = { getStart, getAlumnos, getAlumnoParams, postAlumno, putAlumno, deleteAlumno };

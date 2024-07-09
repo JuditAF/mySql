@@ -2,9 +2,10 @@
 // IMPORTACIÓN DE MÓDULOS
 const express = require('express');
 const cors = require('cors');
-const alumnoRouters = require("./src/routers/alumno.routers");
-// const booksRouters = require("./src/routers/books.routers")        
-const errorHandling = require ('./src/error/errorHandling');
+const alumnoRouters = require("./routers/alumno.routers");
+// const alumnoModel = require("./models/alumno");  
+// const respuestaModel = require("./models/respuesta");      
+const errorHandling = require ('./error/errorHandling');
 
 
 // GENERAMOS EL OBJETO APP
@@ -23,6 +24,8 @@ app.use(express.json());                                // DESTINO EN FORMATO .J
 
 
 app.use(alumnoRouters);                           // LLAMAMOS A NUESTRA API QUE SE ENCUENTRA EN LAS RUTAS DE LOS ENDPOINTS
+// app.use(alumnoModel);
+// app.use(respuestaModel);
 // app.use(booksRouters);                                   
 
 
