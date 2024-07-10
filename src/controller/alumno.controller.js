@@ -12,7 +12,7 @@ const getStart = async (request, response) => {
             response.send(respuesta);}
     }
     catch (error) {
-        response.status(500).Json({ error: error.message });                                                    // Json es un método conversor de formato
+        response.send({error: true, codigo: 500, mensaje: error});                                                    // Json es un método conversor de formato
     }
 };
 
@@ -23,12 +23,12 @@ const getAlumnos = async (request, response) => {
         console.log(sql);
 
         let [result] = await pool.query(sql);                                                                   // Destructuring  
-                                                                   
-        let respuesta = { error: false, codigo: 200, mensaje: "Alumnos almacenados", data: Json(result) }
+                                                                 
+        let respuesta = { error: false, codigo: 200, mensaje: "Alumnos almacenados", data: result }
         response.send(respuesta);
         // response.JSON(result);
       } catch (error) {
-        response.status(500).Json({ error: error.message });
+        response.send({error: true, codigo: 500, mensaje: error});
       }
     };
 
