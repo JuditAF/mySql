@@ -19,7 +19,7 @@ module.exports = router;
 // { 
 //     "id_student": 36,
 //     "first_name": "Enrique",
-//     "lasta_name": "Nuñez",
+//     "last_name": "Nuñez",
 //     "fecha_ingreso": "2023-12-20",
-//     "id_grupos: 2"
+//     "id_grupos": 2
 //  }

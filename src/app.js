@@ -3,6 +3,7 @@
 const express = require('express');
 const cors = require('cors');
 const alumnoRouters = require("./routers/alumno.routers");
+const subjectRouters = require("./routers/subject.routers");
 // const alumnoModel = require("./models/alumno");  
 // const respuestaModel = require("./models/respuesta");      
 const errorHandling = require ('./error/errorHandling');
@@ -26,7 +27,7 @@ app.use(express.json());                                // DESTINO EN FORMATO .J
 app.use(alumnoRouters);                           // LLAMAMOS A NUESTRA API QUE SE ENCUENTRA EN LAS RUTAS DE LOS ENDPOINTS
 // app.use(alumnoModel);
 // app.use(respuestaModel);
-// app.use(booksRouters);                                   
+app.use(subjectRouters);                                   
 
 
 //  RECOGEMOS ERRORES
